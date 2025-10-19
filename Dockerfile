@@ -13,6 +13,9 @@ RUN npm ci --only=production
 # Копируем исходный код
 COPY . .
 
+# Копируем файл с переменными окружения (если существует)
+COPY env.example .env
+
 # Собираем приложение для продакшена
 RUN npm run build
 
