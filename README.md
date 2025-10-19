@@ -1,4 +1,105 @@
-# Getting Started with Create React App
+# Aldar Storyboard
+
+Приложение для просмотра историй про Алдара Косе, созданное с помощью React.
+
+## Запуск в Docker
+
+### Быстрый запуск с Docker Compose
+
+1. Убедитесь, что у вас установлен Docker и Docker Compose
+2. Выполните команду:
+```bash
+docker-compose up --build
+```
+
+3. Откройте браузер и перейдите по адресу: http://localhost:3000
+
+### Запуск с помощью Docker
+
+1. Соберите Docker образ:
+```bash
+docker build -t aldar-storyboard .
+```
+
+2. Запустите контейнер:
+```bash
+docker run -p 3000:80 aldar-storyboard
+```
+
+3. Откройте браузер и перейдите по адресу: http://localhost:3000
+
+### Остановка контейнера
+
+Для остановки контейнера, запущенного через Docker Compose:
+```bash
+docker-compose down
+```
+
+Для остановки контейнера, запущенного через Docker:
+```bash
+docker stop <container_id>
+```
+
+## 🚀 Публикация проекта
+
+### GitHub
+1. Создайте новый репозиторий на GitHub
+2. Выполните команды:
+```bash
+git add .
+git commit -m "Initial commit: Aldar Storyboard React app"
+git branch -M main
+git remote add origin https://github.com/ваш-username/aldar-storyboard.git
+git push -u origin main
+```
+
+### Vercel (Рекомендуется)
+1. Зайдите на [vercel.com](https://vercel.com)
+2. Войдите через GitHub
+3. Нажмите "New Project"
+4. Выберите ваш репозиторий
+5. Нажмите "Deploy" - проект будет доступен по ссылке
+
+### Netlify
+1. Зайдите на [netlify.com](https://netlify.com)
+2. Войдите через GitHub
+3. Нажмите "New site from Git"
+4. Выберите ваш репозиторий
+5. Настройки по умолчанию подойдут
+
+### Docker Hub
+```bash
+# Соберите образ
+docker build -t ваш-username/aldar-storyboard .
+
+# Войдите в Docker Hub
+docker login
+
+# Загрузите образ
+docker push ваш-username/aldar-storyboard
+```
+
+### Локальная передача
+```bash
+# Создайте архив (без node_modules)
+tar -czf aldar-storyboard.tar.gz --exclude=node_modules --exclude=.git .
+```
+
+## ⚙️ Настройка
+
+### Переменные окружения
+Создайте файл `.env` в корне проекта (опционально):
+```env
+REACT_APP_API_URL=https://aitysai.kazdev.team
+REACT_APP_API_TIMEOUT=30000
+```
+
+### Требования
+- Node.js 16+ 
+- npm или yarn
+- Docker (для контейнеризации)
+
+## 🛠 Локальная разработка
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
