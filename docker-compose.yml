@@ -9,3 +9,8 @@ services:
     restart: unless-stopped
     environment:
       - NODE_ENV=production
+      - REACT_APP_HTTP_METHOD_GET=GET
+      - REACT_APP_HTTP_METHOD_POST=POST
+      - REACT_APP_API_BASE_URL=https://aitysai.kazdev.team
+      - REACT_APP_API_STORIES_ENDPOINT=/rendered_stories/
+      - REACT_APP_API_TASKS_ENDPOINT=/story_tasks/

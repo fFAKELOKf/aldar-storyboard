@@ -1,5 +1,14 @@
 import React, { useState, useEffect } from "react";
 
+// HTTP Methods from environment variables
+const HTTP_METHOD_GET = process.env.REACT_APP_HTTP_METHOD_GET || 'GET';
+const HTTP_METHOD_POST = process.env.REACT_APP_HTTP_METHOD_POST || 'POST';
+
+// API Configuration from environment variables
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL || 'https://aitysai.kazdev.team';
+const API_STORIES_ENDPOINT = process.env.REACT_APP_API_STORIES_ENDPOINT || '/rendered_stories/';
+const API_TASKS_ENDPOINT = process.env.REACT_APP_API_TASKS_ENDPOINT || '/story_tasks/';
+
 export default function App() {
   const [currentPage, setCurrentPage] = useState("stories");
   const [stories, setStories] = useState([]);
@@ -12,8 +21,8 @@ export default function App() {
     const fetchStories = async () => {
       try {
         console.log('Загружаем истории с API...');
-        const response = await fetch('https://aitysai.kazdev.team/rendered_stories/?skip=0&limit=10', {
-          method: 'GET',
+        const response = await fetch(`${API_BASE_URL}${API_STORIES_ENDPOINT}?skip=0&limit=10`, {
+          method: HTTP_METHOD_GET,
           headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -384,7 +393,7 @@ function StoryCard({ story, onSelect }) {
       <div className="relative overflow-hidden rounded-lg">
         <img
           src={firstChapter && firstChapter.image_path 
-            ? `https://aitysai.kazdev.team/${firstChapter.image_path}`
+            ? `${API_BASE_URL}/${firstChapter.image_path}`
             : '/logo192.png'
           }
           alt={story.theme}
@@ -497,7 +506,7 @@ function StoryDetailPage({ story, onBack }) {
   const downloadChapterImage = () => {
     if (!currentChapter || !currentChapter.image_path) return;
     const link = document.createElement("a");
-    link.href = `https://aitysai.kazdev.team/${currentChapter.image_path}`;
+    link.href = `${API_BASE_URL}/${currentChapter.image_path}`;
     link.download = `chapter_${currentChapter.chapter || 'unknown'}.png`;
     link.click();
   };
@@ -558,7 +567,7 @@ function StoryDetailPage({ story, onBack }) {
             <div className="relative group">
               <img
                 src={currentChapter && currentChapter.image_path 
-                  ? `https://aitysai.kazdev.team/${currentChapter.image_path}`
+                  ? `${API_BASE_URL}/${currentChapter.image_path}`
                   : '/logo192.png'
                 }
                 alt={currentChapter && currentChapter.chapter ? `Глава ${currentChapter.chapter}` : "Глава"}
@@ -706,8 +715,8 @@ function GeneratorPage({ onTaskCreated }) {
     
     try {
       console.log('Создаем задачу генерации...');
-      const response = await fetch('https://aitysai.kazdev.team/story_tasks/', {
-        method: 'POST',
+      const response = await fetch(`${API_BASE_URL}${API_TASKS_ENDPOINT}`, {
+        method: HTTP_METHOD_POST,
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
@@ -746,7 +755,7 @@ function GeneratorPage({ onTaskCreated }) {
           frameNumber: 1,
           caption: `Задача создана: ${theme}`,
           image: {
-            url: `https://aitysai.kazdev.team/images/frame_68f41bef9396125ba6f0e6b1.png`,
+            url: `${API_BASE_URL}/images/frame_68f41bef9396125ba6f0e6b1.png`,
             description: "Задача отправлена на генерацию"
           }
         }]
